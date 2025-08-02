@@ -26,6 +26,7 @@ stages:
 
 - stage: DeployDev
   displayName: Deploy to DEV environment
+  dependsOn: BuildApp
   jobs:
   - job: DeployFrontendDev
     displayName: Deploy frontend to DEV
@@ -41,6 +42,7 @@ stages:
 
 - stage: DeployProd
   displayName: Deploy to PROD environment
+  dependsOn: BuildApp
   jobs:
   - job: DeployFrontendProd
     displayName: Deploy frontend to PROD
@@ -50,8 +52,6 @@ stages:
 
   - job: DeployBackendProd
     displayName: Deploy backend to PROD
-    pool:
-      vmImage: 'vs2017-win2016'
     steps:
     - script: echo deploying backend app to PROD
       displayName: deploy backend app to PROD
